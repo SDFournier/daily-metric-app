@@ -29,7 +29,31 @@ export class TaskService {
         const assignmentObjectId = query.assignmentid ? {
             assignment: new mongoose.Types.ObjectId(query['assignmentid'] as string)
           } : {};
-        const tasks = await this.taskModel.find({$and: [{ ...keyword},{ ...assignmentObjectId }]}).sort({ createdAt: 'desc' });
+
+        const categoryObjectId = query.categoryid ? {
+            category: new mongoose.Types.ObjectId(query['categoryid'] as string)
+          } : {};
+      
+        const fromDate = query.fromdate
+        ? new Date(query.fromdate as string)
+        : undefined;
+
+        const toDate = query.todate 
+        ? new Date(`${query.todate}T23:59:59.999Z`)
+        : undefined;
+        const dateFilter = {}
+        if (fromDate || toDate) {
+            dateFilter["createdAt"] = {};
+        if (fromDate) {
+            dateFilter["createdAt"]["$gte"] = fromDate;
+        }
+        if (toDate) {
+            dateFilter["createdAt"]["$lt"] = toDate;
+
+        }
+        }
+        
+        const tasks = await this.taskModel.find({$and: [{ ...keyword},{ ...assignmentObjectId },{ ...categoryObjectId },{...dateFilter}]}).sort({ createdAt: 'desc' });
         return tasks;
     }
 
@@ -41,11 +65,9 @@ export class TaskService {
     const categoryExists = await this.categoryModel.exists({ _id: task.category });
 
     if (!assignmentExists) {
-        console.log("sadsad")
         throw new BadRequestException('Invalid Assignment ID')
     } else if(!categoryExists)
     {
-        console.log("sadsad")
         throw new BadRequestException('Invalid Category ID')
     }
 
