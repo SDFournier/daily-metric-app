@@ -9,6 +9,8 @@ export class CreateAssignmentDto {
     readonly author: string;
     
     readonly category: string;
+
+    readonly color: string;
     
     
     }

@@ -1,4 +1,4 @@
-import { IsDateString, IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { IsDateString, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
 
 export class UpdateTaskDto {
 
@@ -19,7 +19,8 @@ export class UpdateTaskDto {
     readonly category: string;
     @IsDateString()
     readonly dateStartOfTask: string;
-    @IsNotEmpty()
+    @IsOptional()
+    @IsNotEmpty({message: 'dateEndOfTask is required'})
     @IsDateString()
     readonly dateEndOfTask: string;
     @IsNotEmpty()

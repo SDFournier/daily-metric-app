@@ -16,6 +16,8 @@ export class Assignment {
         author: string;
     @Prop()
         category: string;
+    @Prop()
+        color: string;
     
     }
 

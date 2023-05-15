@@ -27,13 +27,14 @@ export class TaskController {
     ):Promise<Task>
     {
         try {
+            console.log("createTaskDto: ", createTaskDto)
         const { assignment, category, dateEndOfTask , dateStartOfTask , ...task } = createTaskDto;
         return  this.taskService.create({
             ...task,
             assignment: new mongoose.Types.ObjectId(assignment),
             category: new mongoose.Types.ObjectId(category),
             dateStartOfTask:  new Date(dateStartOfTask),
-            dateEndOfTask:  new Date(dateEndOfTask)
+            dateEndOfTask:  dateEndOfTask? new Date(dateEndOfTask):null
         });
         } catch (error) {
             throw new BadRequestException(error.message)
@@ -61,7 +62,7 @@ export class TaskController {
     }
 
     @Put(':id')
-    async updateBook(
+    async updateTask(
         @Param('id')//we define where to store ir
 
         id: string,
@@ -71,13 +72,14 @@ export class TaskController {
     ):Promise<Task>
 
     {
-
+        
         const { assignment, category, dateEndOfTask , dateStartOfTask, ...task } = updateTaskDto;
+        console.log("task updated: ", task)
         return this.taskService.updateById(id,{
             ...task,
             category: new mongoose.Types.ObjectId(category),
             assignment: new mongoose.Types.ObjectId(assignment),
-            dateEndOfTask: new Date(dateStartOfTask),
+            dateEndOfTask: dateEndOfTask? new Date(dateEndOfTask):null,
             dateStartOfTask: new Date(dateStartOfTask),
         });
 

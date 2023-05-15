@@ -18,8 +18,8 @@ export class Task{
         category: mongoose.Types.ObjectId;
     @Prop({ required: true })
         dateStartOfTask: Date;
-    @Prop({ required: true })
-        dateEndOfTask: Date;
+    @Prop()
+        dateEndOfTask: Date | null;
     @Prop({ required: true })
         duration: number;
 
