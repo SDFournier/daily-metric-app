@@ -13,7 +13,7 @@ import { CategoryModule } from './category/category.module';
       envFilePath: '.env',
       isGlobal: true,
     }),
-    MongooseModule.forRoot(process.env.DB_URI),
+    MongooseModule.forRoot(process.env.NODE_ENV === 'production' ? process.env.DB_URI : process.env.DB_URI_DEV),
     TaskModule,
     AssignmentModule,
     CategoryModule
