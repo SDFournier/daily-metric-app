@@ -1,0 +1,26 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 19.8.1
+    commands:
+      - npm install
+  pre_build:
+    commands:
+  build:
+    commands:
+      - npm run build
+        - echo "Build completed on $(date)"
+  deploy:
+    commands:
+      - npm run build
+      - forever stopall
+      - forever start dist/main.js
+artifacts:
+  files:
+    - '**/*'
+  base-directory: 'dist'
+cache:
+  paths:
+    - node_modules/
