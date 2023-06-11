@@ -6,6 +6,7 @@ phases:
       nodejs: 14
     commands:
       - npm install
+      - npm install forever -g
   pre_build:
     commands:
   build:
