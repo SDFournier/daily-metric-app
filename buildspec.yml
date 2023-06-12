@@ -3,24 +3,21 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      nodejs: 14
+      nodejs: 19.8.1
     commands:
-      - npm install
-      - npm install forever -g
+
   pre_build:
     commands:
   build:
     commands:
-      - npm run build
-  post_build:
+  deploy:
     commands:
-      - npm run build
-      - forever stopall
-      - forever start dist/main.js
+
 artifacts:
   files:
     - '**/*'
   base-directory: 'dist'
+
 cache:
   paths:
     - node_modules/
