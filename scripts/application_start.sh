@@ -1,5 +1,5 @@
 #!/bin/bash
 set -e
-forever stopall
-cd /var/www/myapp
-forever start dist/main.js
+sudo forever stopall
+sudo cd /var/www/myapp
+sudo forever start dist/main.js

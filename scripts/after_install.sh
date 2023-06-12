@@ -1,5 +1,5 @@
 #!/bin/bash
 set -e
 cd /var/www/myapp
-npm install
-npm run build
+sudo npm install
+sudo npm run build
