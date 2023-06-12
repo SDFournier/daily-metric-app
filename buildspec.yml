@@ -3,7 +3,7 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      nodejs: 19.8.1
+      nodejs: 14
     commands:
 
   pre_build:
