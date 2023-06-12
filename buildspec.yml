@@ -10,8 +10,6 @@ phases:
     commands:
   build:
     commands:
-  deploy:
-    commands:
 
 artifacts:
   files:
